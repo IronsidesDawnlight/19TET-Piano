@@ -20,7 +20,7 @@ public class Key : MonoBehaviour
         aud = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         aud.pitch = Mathf.Pow(2, (step)/19.0f );
-        aud.clip = choirSource;
+        aud.clip = pianoSource;
 
         switch ( step % 19 )
         {
