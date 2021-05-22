@@ -143,8 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   step: 0
   keyboardInput: 
-  pianoSource: {fileID: 8300000, guid: 7d491bef5c4b7064ab5896bf458bb059, type: 3}
-  choirSource: {fileID: 8300000, guid: 47ea938006f04274a8d112f0c3c26638, type: 3}
+  sources:
+  - {fileID: 8300000, guid: 7084edf531902b549bd239ecd4217723, type: 3}
+  - {fileID: 8300000, guid: 780d14c277372475d821b42b0bce43c6, type: 3}
+  sourceOffset: 0
 --- !u!212 &6294192954541367887
 SpriteRenderer:
   m_ObjectHideFlags: 0

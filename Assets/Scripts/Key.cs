@@ -6,22 +6,65 @@ public class Key : MonoBehaviour
 {
     AudioSource aud;
     SpriteRenderer sr;
+    KeyManager km;
+    
     Color normalColor, highlightColor;
+    bool fading = false;
+    float fadeTime = 0.1f; // WARNING: fadeTime cannot be 0
 
     // Public
-    public int step;
+    public int step; // The step of this note in 19-TET
     public string keyboardInput;
-    public AudioClip pianoSource;
-    public AudioClip choirSource;
+    public AudioClip[] sources = new AudioClip[(int)Instruments.__CNT];
+    public int sourceOffset; // The step of audiosource in 12-TET
 
     // Start is called before the first frame update
     void Start()
     {
         aud = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
-        aud.pitch = Mathf.Pow(2, (step)/19.0f );
-        aud.clip = pianoSource;
+        km = GameObject.Find("KeyManager").GetComponent<KeyManager>();
 
+        aud.pitch = Mathf.Pow(2, (step)/19.0f - (sourceOffset)/12.0f );
+        SetSource( Instruments.PIANO );
+
+        km.Attach( this );
+        SetColor();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if ( Input.GetKeyDown( keyboardInput ) ){
+            Play();
+        }
+        else if (Input.GetKeyUp( keyboardInput )){
+            Stop();
+        }
+
+        if ( fading ) {
+            aud.volume -= Time.deltaTime / fadeTime;
+            if ( aud.volume <= 0 ){
+                aud.volume = 0;
+                fading = false;
+                aud.Stop();
+            }
+        }
+    }
+
+    void Play(){
+        fading = false;
+        aud.volume = 1f;
+        aud.Play();
+        sr.color = highlightColor;
+    }
+
+    void Stop(){
+        fading = true;
+        sr.color = normalColor;
+    }
+
+    public void SetColor(){
         switch ( step % 19 )
         {
             case 0:
@@ -31,14 +74,14 @@ public class Key : MonoBehaviour
             case 11:
             case 14:
             case 17:
-                normalColor = new Color( 1.0f, 1.0f, 1.0f, 1.0f );
+                normalColor = km.white;
                 break;
             case 1:
             case 4:
             case 9:
             case 12:
             case 15:
-                normalColor = new Color( 0.5f, 0.5f, 0.5f, 1.0f );
+                normalColor = km.grey;
                 break;
             case 2:
             case 5:
@@ -47,27 +90,29 @@ public class Key : MonoBehaviour
             case 13:
             case 16:
             case 18:
-                normalColor = new Color( 0f, 0f, 0f, 1f );
+                normalColor = km.black;
                 break;
             default:
-                normalColor = new Color( 1.0f, 1.0f, 1.0f, 1.0f );
+                normalColor = km.white;
                 break;
         }
-        highlightColor = new Color( 0.5f, 0.7f, 0.5f, 1.0f );
+        highlightColor = km.highlight;
 
         sr.color = normalColor;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if ( Input.GetKeyDown( keyboardInput ) ){
-            aud.Play();
-            sr.color = highlightColor;
-        }
-        else if (Input.GetKeyUp( keyboardInput )){
-            aud.Stop();
-            sr.color = normalColor;
+    public void SetSource( Instruments instrument ){
+        aud.clip = sources[(int)instrument];
+        switch ( instrument ){
+            case Instruments.PIANO:
+                fadeTime = 0.1f;
+                break;
+            case Instruments.CHOIR:
+                fadeTime = 0.3f;
+                break;
+            default:
+                fadeTime = 0.1f;
+                break;
         }
     }
 }
