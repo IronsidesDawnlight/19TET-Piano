@@ -10,7 +10,7 @@ P.S. Should be working but I didn't try it
 
 # How to use?
 
-You can play the piano by your keyboard. Press `"Z"` for `C4` and `","` for `C4`, etc.
+You can play the piano by your keyboard. Press `"Z"` for `C4` and `","` for `C5`, etc.
 
 There are also instruments including:
 
