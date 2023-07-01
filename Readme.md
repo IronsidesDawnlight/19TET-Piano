@@ -4,9 +4,10 @@ A 19-Tone Equal Temperament piano.
 
 # How to compile?
 
-Create a new Unity 2D project and move everything into the project folder. Open `SampleScene.unity`.
-
-P.S. Should be working but I didn't try it
+Clone or download this repo.
+In Unity hub, have Unity locate the folder you downloaded.
+Unity may display a warning sign and prompt you to download the correct editor. Follow the instructions.
+Open `SampleScene.unity`.
 
 # How to use?
 
