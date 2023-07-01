@@ -5,9 +5,12 @@ A 19-Tone Equal Temperament piano.
 # How to compile?
 
 Clone or download this repo.
-In Unity hub, have Unity locate the folder you downloaded.
+
+In Unity hub, have Unity locate the folder `19TET-Piano` you downloaded.
+
 Unity may display a warning sign and prompt you to download the correct editor. Follow the instructions.
-Open `SampleScene.unity`.
+
+Open `Scenes\SampleScene.unity`.
 
 # How to use?
 
