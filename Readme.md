@@ -21,6 +21,10 @@ There are also instruments including:
 * `1` - piano
 * `2` - choir
 
+# Demo
+
+See [here](https://www.bilibili.com/video/BV1Za4y1c7HU/) for a demo.
+
 # Credits
 
 The piano audiosource comes from https://github.com/TomerAberbach/piano.
